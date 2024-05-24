@@ -1,0 +1,1 @@
+# Starts the Flask application making it ready to accept requests

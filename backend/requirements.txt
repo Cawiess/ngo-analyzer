@@ -1,0 +1,5 @@
+Flask
+Pymongo
+requests
+beautifulsoup4
+pandas
