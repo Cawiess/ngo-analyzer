@@ -4,3 +4,5 @@ python-dotenv
 requests
 beautifulsoup4
 pandas
+sqlalchemy
+flask-sqlalchemy

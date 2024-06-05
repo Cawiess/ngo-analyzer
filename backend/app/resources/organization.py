@@ -3,7 +3,6 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from db import organizations
 from schemas.schemas import OrganizationSchema
 
 # The Blueprint is used to divide an api into multiple segments.
