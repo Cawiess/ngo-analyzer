@@ -1,1 +1,0 @@
-# Defines model representing job advertisement data
