@@ -12,11 +12,20 @@ from schemas.schemas import OrganizationSchema
 
 blp = Blueprint("organizations", __name__, description="Operations on organizations")
 
-@blp.route("/organization/<string:organization_id>")
+@blp.route("/organization/id/<string:organization_id>")
 class Organization(MethodView):
     @blp.response(200, OrganizationSchema)
     def get(self, organization_id):
         organization = OrganizationModel.query.get_or_404(organization_id)
+        return organization
+    
+@blp.route("/organization/name/<string:name>")
+class OrganizationByName(MethodView):
+    @blp.response(200, OrganizationSchema)
+    def get(self, name):
+        organization = OrganizationModel.query.filter_by(name=name).first()
+        if not organization:
+            abort(404, message="Organization not found.")
         return organization
 
 
