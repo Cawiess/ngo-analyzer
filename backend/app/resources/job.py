@@ -6,7 +6,7 @@ from sqlalchemy.orm import joinedload
 
 from db import db
 from schemas.schemas import JobSchema
-from models import JobModel
+from models import JobModel, OrganizationModel
 
 # The Blueprint is used to divide an api into multiple segments.
 
@@ -34,7 +34,24 @@ class JobList(MethodView):
     @blp.arguments(JobSchema)
     @blp.response(201, JobSchema)
     def put(self, job_data):
-        job = JobModel(**job_data)
+        #job = JobModel(**job_data)
+
+        # Query DB for organization name to get organization ID
+        # If organization not in DB, add organization
+
+        organization_name = job_data.pop("organization_name")
+        organization = OrganizationModel.query.filter_by(name=organization_name).first()
+
+        if not organization:
+            organization = OrganizationModel(name=organization_name)
+            db.session.add(organization)
+            try:
+                db.session.commit()
+            except:
+                abort(500, message="An error occurred while inserting job.")
+
+
+        job = JobModel(**job_data, organization_id=organization.id)
 
         try:
             db.session.add(job)
