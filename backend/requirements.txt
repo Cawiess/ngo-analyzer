@@ -6,3 +6,4 @@ beautifulsoup4
 pandas
 sqlalchemy
 flask-sqlalchemy
+flask-migrate
