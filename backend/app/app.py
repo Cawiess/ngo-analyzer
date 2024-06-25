@@ -4,6 +4,7 @@ import os
 from flask import Flask
 from flask_smorest import Api
 from flask_migrate import Migrate
+from dotenv import load_dotenv
 
 from db import db
 import models
@@ -14,6 +15,7 @@ from resources.organization import blp as OrganizationBlueprint
 # Factory pattern
 def create_app(db_url=None): 
     app = Flask(__name__)
+    load_dotenv()
 
 
     app.config["PROPAGATE_EXCEPTIONS"] = True
