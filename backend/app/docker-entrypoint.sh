@@ -1,6 +1,9 @@
 #!/bin/sh
 
-flask db init
+# Run migrations
+flask db init || true  # Allow this to fail if the migrations folder already exists
 flask db migrate
 flask db upgrade
-flask run --host=0.0.0.0
+
+# Start the Flask app
+exec flask run --host=0.0.0.0
