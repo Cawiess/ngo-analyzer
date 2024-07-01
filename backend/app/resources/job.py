@@ -34,11 +34,6 @@ class JobList(MethodView):
     @blp.arguments(JobSchema)
     @blp.response(201, JobSchema)
     def put(self, job_data):
-        #job = JobModel(**job_data)
-
-        # Query DB for organization name to get organization ID
-        # If organization not in DB, add organization
-
         organization_name = job_data.pop("organization_name")
         organization = OrganizationModel.query.filter_by(name=organization_name).first()
 

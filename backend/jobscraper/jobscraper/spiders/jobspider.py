@@ -34,7 +34,7 @@ class JobspiderSpider(scrapy.Spider):
 
         job_item = JobItem()
         job_item["job_title"] = response.css('section.job-title h1::text').get()
-        job_item["organization"] = response.xpath('//span[text()="Organization:"]/following::text()[1]').get().strip()
+        job_item["organization_name"] = response.xpath('//span[text()="Organization:"]/following::text()[1]').get().strip()
         job_item["location"] = response.xpath('//span[text()="Location:"]/following::text()[1]').get().strip()
         job_item["grade"] = response.xpath('//span[text()="Grade:"]/following::text()[1]').get().strip().replace("\n", "")
         job_item["occupational_groups"] = response.xpath('//span[text()="Occupational Groups:"]/following-sibling::ul/li/text()').getall()

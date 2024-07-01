@@ -13,9 +13,11 @@ class JobscraperItem(scrapy.Item):
 
 class JobItem(scrapy.Item):
     job_title = scrapy.Field()
-    organization = scrapy.Field()
+    organization_name = scrapy.Field()
     location = scrapy.Field()
     grade = scrapy.Field()
     occupational_groups = scrapy.Field()
     closing_date = scrapy.Field()
     job_description = scrapy.Field()
+
+
