@@ -3,6 +3,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload
+from sqlalchemy import func
 
 from db import db
 from schemas.schemas import JobSchema
@@ -55,3 +56,9 @@ class JobList(MethodView):
             abort(500, message="An error occurred while inserting job.")
 
         return job
+    
+@blp.route("/job/count")
+class OrganizationCount(MethodView):
+    def get(self):
+        count = db.session.query(func.count(JobModel.id)).scalar()
+        return {"count": count}

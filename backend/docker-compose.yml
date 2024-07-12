@@ -21,11 +21,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
   webcrawler:
     build: ./jobscraper
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db/myapi
     depends_on:
       - db
     volumes:
       - ./jobscraper:/app
-    #command: ["scrapy", "crawl", "jobspider"]
+    command: ["scrapy", "crawl", "jobspider"]
     
 volumes:
   postgres_data:

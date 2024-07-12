@@ -3,6 +3,7 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import func
 
 from db import db
 from models import OrganizationModel
@@ -47,3 +48,9 @@ class OrganizationList(MethodView):
             abort(500, message="An error occurred while inserting organization.")
 
         return organization
+    
+@blp.route("/organization/count")
+class OrganizationCount(MethodView):
+    def get(self):
+        count = db.session.query(func.count(OrganizationModel.id)).scalar()
+        return {"count": count}

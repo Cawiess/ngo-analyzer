@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-#CMD ["scrapy", "crawl", "your_spider_name"]
+CMD ["scrapy", "crawl", "jobspider"]
